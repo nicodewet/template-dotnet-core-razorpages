@@ -27,7 +27,18 @@ namespace Currency.Services
             {18, "eighteen"},
             {19, "nineteen"} 
         };
+        private static IReadOnlyDictionary<int, string> _secondDigitToText = new Dictionary<int, string> {
+            {20, "twenty"},
+            {30, "thirty"},
+            {40, "fourty"},
+            {50, "fifty"},
+            {60, "sixty"},
+            {70, "seventy"},
+            {80, "eighty"},
+            {90, "ninety"}
+        };
         public static IReadOnlyDictionary<int, string> DigitToText => _digitToText;
+        public static IReadOnlyDictionary<int, string> SecondToText => _secondDigitToText;
         private static readonly string DOLLAR = "dollar";
         private static readonly string CENT = "cent";
         private static readonly string DOLLARS = DOLLAR + "s"; 
@@ -56,11 +67,9 @@ namespace Currency.Services
             }
             if (dollars == 1) {
                 return String.Format("{0} {1}", positiveNumberToText(dollars), DOLLAR);
-            } else if (dollars >= 0 && dollars <= 19) {
-                return String.Format("{0} {1}", positiveNumberToText(dollars), DOLLARS);
             } else {
-                return "";
-            }
+                return String.Format("{0} {1}", positiveNumberToText(dollars), DOLLARS);
+            } 
         }
 
         private string centsToText(int cents) {
@@ -69,10 +78,8 @@ namespace Currency.Services
             }
             if (cents == 1) {
                 return String.Format("{0} {1}", positiveNumberToText(cents), CENT);
-            } else if (cents >= 0 && cents <= 19) {
-                return String.Format("{0} {1}", positiveNumberToText(cents), CENTS);
             } else {
-                return "";
+                return String.Format("{0} {1}", positiveNumberToText(cents), CENTS);
             }
         }
 
@@ -85,9 +92,34 @@ namespace Currency.Services
             if (number <= 19) {
                 DigitToText.TryGetValue(number, out result);
                 return result; 
+            } else if (number > 19 && number < 100) {
+                if (SecondToText.ContainsKey(number)) {
+                    SecondToText.TryGetValue(number, out result);
+                    return result;
+                } else {
+                    int[] numberParts = GetIntParts(number);
+                    Console.WriteLine(numberParts[0]);
+                    Console.WriteLine(numberParts[1]);
+                    string firstPart = "";
+                    SecondToText.TryGetValue(numberParts[1], out firstPart);
+                    string secondPart = "";
+                    DigitToText.TryGetValue(numberParts[0], out secondPart);
+                    return String.Format("{0}-{1}", firstPart, secondPart);
+                }
             } else {
                 return result;
             }
+        }
+        private int [] GetIntParts(int num) {
+            if (num < 10 || num > 99) {
+                throw new ArgumentException("only 10 to 99 are valid");
+            }
+            int[] parts = new int[2];
+            int remainder = num % 10;
+            parts[0] = remainder;
+            int quotient = num - remainder;
+            parts[1] = quotient;
+            return parts;
         }
     }
 }
