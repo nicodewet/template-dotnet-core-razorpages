@@ -33,7 +33,7 @@ info: Microsoft.Hosting.Lifetime[0]
       Content root path: /Users/nico/git/DOTNET/template-dotnet-core-razorpages/webApp
 ```
 
-## Contrived Requirements
+## Dummy Requirements
 
 As an exercise we will develop a working web application in C# consisting of two or more web pages that perform the following function:
 
