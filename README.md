@@ -17,7 +17,21 @@ If your primary concern as a developer is to get the web application up and runn
 
 * [Download and install .NET Core SDK 3.1](https://dotnet.microsoft.com/download)
 * Clone this git repository
-* Navigate to the repository directory from a command line terminal and execute: TODO finish
+* Navigate to the repository directory from a command line terminal and execute: dotnet run --project webApp
+
+Example of running up the webApp:
+
+```bash
+nico@Nicos-Air template-dotnet-core-razorpages % dotnet run --project webApp
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: http://localhost:5000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /Users/nico/git/DOTNET/template-dotnet-core-razorpages/webApp
+```
 
 ## Contrived Requirements
 
