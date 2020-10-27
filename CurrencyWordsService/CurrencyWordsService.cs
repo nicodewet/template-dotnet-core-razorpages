@@ -43,9 +43,14 @@ namespace Currency.Services
         private static readonly string CENT = "cent";
         private static readonly string DOLLARS = DOLLAR + "s"; 
         private static readonly string CENTS = CENT + "s";
+        private static readonly string HUNDRED = "hundred";
 
         public string toWordsInDollarsAndCents(decimal candidate)
         {
+            if (candidate >= 1000m) {
+                throw new NotSupportedException("supporting numbers less than 1000 at present");
+            }
+
             string result = "";
 
             decimal roundedCandidate = Math.Round(candidate, 2, MidpointRounding.ToEven);
@@ -98,17 +103,24 @@ namespace Currency.Services
                     return result;
                 } else {
                     int[] numberParts = GetIntParts(number);
-                    Console.WriteLine(numberParts[0]);
-                    Console.WriteLine(numberParts[1]);
+                    //Console.WriteLine(numberParts[0]);
+                    //Console.WriteLine(numberParts[1]);
                     string firstPart = "";
                     SecondToText.TryGetValue(numberParts[1], out firstPart);
                     string secondPart = "";
                     DigitToText.TryGetValue(numberParts[0], out secondPart);
                     return String.Format("{0}-{1}", firstPart, secondPart);
                 }
-            } else {
+            } else if (number >= 100 && number < 1000) {
+                int hundreds_digit = number / 100;
+                Console.WriteLine(hundreds_digit);
+                int remainder = number % 100;
+                Console.WriteLine(remainder);
+                DigitToText.TryGetValue(hundreds_digit, out result);
+                result = String.Format("{0} hundred and {1}", result, positiveNumberToText(remainder));
                 return result;
             }
+            return result;
         }
         private int [] GetIntParts(int num) {
             if (num < 10 || num > 99) {
