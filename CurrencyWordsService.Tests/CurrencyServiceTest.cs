@@ -33,6 +33,16 @@ namespace Currency.Services.Tests
        [InlineData("1.07", "ONE DOLLAR AND SEVEN CENTS")]
        [InlineData("1.08", "ONE DOLLAR AND EIGHT CENTS")]
        [InlineData("1.09", "ONE DOLLAR AND NINE CENTS")]
+       [InlineData("2.00", "TWO DOLLARS AND ZERO CENTS")]
+       [InlineData("2.01", "TWO DOLLARS AND ONE CENT")]
+       [InlineData("2.02", "TWO DOLLARS AND TWO CENTS")]
+       [InlineData("2.03", "TWO DOLLARS AND THREE CENTS")]
+       [InlineData("2.04", "TWO DOLLARS AND FOUR CENTS")]
+       [InlineData("2.05", "TWO DOLLARS AND FIVE CENTS")]
+       [InlineData("2.06", "TWO DOLLARS AND SIX CENTS")]
+       [InlineData("2.07", "TWO DOLLARS AND SEVEN CENTS")]
+       [InlineData("2.08", "TWO DOLLARS AND EIGHT CENTS")]
+       [InlineData("2.09", "TWO DOLLARS AND NINE CENTS")]
        public void ToWords(string value, string expected)
        {
            decimal number = Convert.ToDecimal(value);
