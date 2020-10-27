@@ -107,7 +107,23 @@ template-dotnet-core-razorpages % dotnet test
 
 ### Phase 2 - Razor Pages Setup
 
-TODO
+```bash
+template-dotnet-core-razorpages % dotnet new webApp -o webApp --no-https
+```
+
+```bash
+template-dotnet-core-razorpages % dotnet sln add ./webApp/webApp.csproj
+```
+
+Run the generated web application as sanity check. Open http://localhost:5000 in a browser. 
+
+```bash
+dotnet run --project webApp
+```
+
+Now wire the services layer into the webApp project.
+
+
 
 ## Next Steps
 
