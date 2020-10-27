@@ -43,8 +43,6 @@ namespace Currency.Services
         private static readonly string CENT = "cent";
         private static readonly string DOLLARS = DOLLAR + "s"; 
         private static readonly string CENTS = CENT + "s";
-        private static readonly string HUNDRED = "hundred";
-
         public string toWordsInDollarsAndCents(decimal candidate)
         {
             if (candidate >= 1000m) {
@@ -92,8 +90,7 @@ namespace Currency.Services
             string result = "";
             if (number < 0) {
                 throw new ArgumentException("number must be positive");
-            }
-            //int numberOfDigits = number.ToString().Length; 
+            } 
             if (number <= 19) {
                 DigitToText.TryGetValue(number, out result);
                 return result; 
@@ -103,8 +100,6 @@ namespace Currency.Services
                     return result;
                 } else {
                     int[] numberParts = GetIntParts(number);
-                    //Console.WriteLine(numberParts[0]);
-                    //Console.WriteLine(numberParts[1]);
                     string firstPart = "";
                     SecondToText.TryGetValue(numberParts[1], out firstPart);
                     string secondPart = "";
@@ -113,11 +108,13 @@ namespace Currency.Services
                 }
             } else if (number >= 100 && number < 1000) {
                 int hundreds_digit = number / 100;
-                Console.WriteLine(hundreds_digit);
                 int remainder = number % 100;
-                Console.WriteLine(remainder);
                 DigitToText.TryGetValue(hundreds_digit, out result);
-                result = String.Format("{0} hundred and {1}", result, positiveNumberToText(remainder));
+                if (remainder != 0) {
+                    result = String.Format("{0} hundred and {1}", result, positiveNumberToText(remainder));
+                } else {
+                    result = String.Format("{0} hundred", result);
+                }
                 return result;
             }
             return result;
