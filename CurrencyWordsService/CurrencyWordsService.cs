@@ -15,7 +15,17 @@ namespace Currency.Services
             {6, "six"},
             {7, "seven"},
             {8, "eight"},
-            {9, "nine"}, 
+            {9, "nine"},
+            {10, "ten"},
+            {11, "eleven"},
+            {12, "twelve"},
+            {13, "thirteen"},
+            {14, "fourteen"},
+            {15, "fifteen"},
+            {16, "sixteen"},
+            {17, "seventeen"},
+            {18, "eighteen"},
+            {19, "nineteen"} 
         };
         public static IReadOnlyDictionary<int, string> DigitToText => _digitToText;
         private static readonly string DOLLAR = "dollar";
@@ -46,7 +56,7 @@ namespace Currency.Services
             }
             if (dollars == 1) {
                 return String.Format("{0} {1}", positiveNumberToText(dollars), DOLLAR);
-            } else if (dollars >= 0 && dollars <= 9) {
+            } else if (dollars >= 0 && dollars <= 19) {
                 return String.Format("{0} {1}", positiveNumberToText(dollars), DOLLARS);
             } else {
                 return "";
@@ -59,7 +69,7 @@ namespace Currency.Services
             }
             if (cents == 1) {
                 return String.Format("{0} {1}", positiveNumberToText(cents), CENT);
-            } else if (cents >= 0 && cents <= 9) {
+            } else if (cents >= 0 && cents <= 19) {
                 return String.Format("{0} {1}", positiveNumberToText(cents), CENTS);
             } else {
                 return "";
@@ -71,8 +81,8 @@ namespace Currency.Services
             if (number < 0) {
                 throw new ArgumentException("number must be positive");
             }
-            int numberOfDigits = number.ToString().Length; 
-            if (numberOfDigits == 1) {
+            //int numberOfDigits = number.ToString().Length; 
+            if (number <= 19) {
                 DigitToText.TryGetValue(number, out result);
                 return result; 
             } else {

@@ -43,6 +43,7 @@ namespace Currency.Services.Tests
        [InlineData("2.07", "TWO DOLLARS AND SEVEN CENTS")]
        [InlineData("2.08", "TWO DOLLARS AND EIGHT CENTS")]
        [InlineData("2.09", "TWO DOLLARS AND NINE CENTS")]
+       [InlineData("19.19", "NINETEEN DOLLARS AND NINETEEN CENTS")]
        public void ToWords(string value, string expected)
        {
            decimal number = Convert.ToDecimal(value);
